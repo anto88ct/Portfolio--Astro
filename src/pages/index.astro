@@ -1,0 +1,95 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+
+const projects = [
+    {
+        title: "E-Commerce Dashboard",
+        description: "Una dashboard completa per la gestione di ordini e prodotti, con analisi in tempo reale.",
+        tags: ["Angular", "TypeScript", "Firebase"],
+        color: "from-cyan-400 to-blue-500"
+    },
+    {
+        title: "Task Management App",
+        description: "Applicazione per la gestione di task collaborativi con funzionalità drag-and-drop.",
+        tags: ["Angular", "RxJS", "Tailwind"],
+        color: "from-purple-400 to-pink-500"
+    },
+    {
+        title: "Portfolio v1",
+        description: "Il mio primo portfolio personale creato con tecnologie web moderne.",
+        tags: ["HTML", "SCSS", "JavaScript"],
+        color: "from-green-400 to-emerald-500"
+    }
+];
+---
+
+<MainLayout title="Antonio | Portfolio">
+	<!-- Hero Section -->
+	<main class="flex flex-col items-center justify-center min-h-[90vh] py-12 relative overflow-hidden">
+		<!-- Background decorations -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+            <div class="absolute top-[20%] left-[20%] w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
+            <div class="absolute bottom-[20%] right-[20%] w-96 h-96 bg-blue-600/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        </div>
+
+		<div class="relative group mb-8">
+			<div class="absolute -inset-1 bg-gradient-to-r from-cyan-400 to-blue-600 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
+			<div class="relative px-7 py-4 bg-slate-900 rounded-lg leading-none flex items-center">
+				<span class="text-cyan-400 font-medium">👋 Ciao, sono Antonio</span>
+			</div>
+		</div>
+		
+		<h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-center text-white mb-6">
+			Senior Developer <br />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">specializzato in Angular</span>
+		</h1>
+        
+        <p class="text-lg text-slate-300 text-center max-w-2xl mb-10 leading-relaxed">
+            Costruisco applicazioni web scalabili e performanti, con un focus maniacale sulla user experience e sulla qualità del codice.
+        </p>
+
+        <div class="flex gap-4">
+            <a href="#projects" class="rounded-full bg-cyan-500 px-8 py-3 font-bold text-black transition hover:bg-cyan-400 transform hover:scale-105">
+                Vedi Progetti
+            </a>
+            <a href="/about" class="rounded-full border border-slate-700 bg-slate-900/50 px-8 py-3 font-bold text-white transition hover:bg-slate-800 hover:text-cyan-400 hover:border-cyan-400/50">
+                Chi Sono
+            </a>
+        </div>
+	</main>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 scroll-mt-20">
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-16">
+            Progetti Recenti
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.map((project) => (
+                <article class="group relative rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-500/50 transition duration-300 overflow-hidden hover:shadow-2xl hover:shadow-cyan-500/10">
+                    <!-- Image Placeholder -->
+                    <div class={`h-48 w-full bg-gradient-to-br ${project.color} opacity-80 group-hover:opacity-100 transition duration-300 flex items-center justify-center`}>
+                        <span class="text-white/20 text-6xl font-black select-none">IMG</span>
+                    </div>
+                    
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+                            {project.title}
+                        </h3>
+                        <p class="text-slate-400 mb-4 h-20 overflow-hidden">
+                            {project.description}
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2">
+                            {project.tags.map((tag) => (
+                                <span class="px-3 py-1 text-xs font-semibold rounded-full bg-slate-800 text-cyan-400 border border-slate-700">
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+                </article>
+            ))}
+        </div>
+    </section>
+</MainLayout>

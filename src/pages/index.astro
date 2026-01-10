@@ -3,86 +3,162 @@ import MainLayout from '../layouts/MainLayout.astro';
 
 const projects = [
     {
-        title: "E-Commerce Dashboard",
-        description: "Una dashboard completa per la gestione di ordini e prodotti, con analisi in tempo reale.",
-        tags: ["Angular", "TypeScript", "Firebase"],
-        color: "from-cyan-400 to-blue-500"
+        title: "Seedma Asset Manager",
+        description: "Applicazione web enterprise per la gestione completa delle manutenzioni di grandi impianti industriali.",
+        tags: ["Angular", "TypeScript", "Dotnet", "HTML", "CSS"],
+        color: "from-blue-600 to-indigo-700"
     },
     {
-        title: "Task Management App",
-        description: "Applicazione per la gestione di task collaborativi con funzionalità drag-and-drop.",
-        tags: ["Angular", "RxJS", "Tailwind"],
-        color: "from-purple-400 to-pink-500"
+        title: "PayPeek System",
+        description: "Sistema HR innovativo con gestione buste paga, OCR e dashboard analitiche avanzate.",
+        tags: ["Angular", "Spring Boot", "Sviluppo in corso"],
+        color: "from-emerald-500 to-teal-700"
     },
     {
-        title: "Portfolio v1",
-        description: "Il mio primo portfolio personale creato con tecnologie web moderne.",
-        tags: ["HTML", "SCSS", "JavaScript"],
-        color: "from-green-400 to-emerald-500"
+        title: "Portfolio v2",
+        description: "Portfolio personale moderno e performante sviluppato con Astro e TailwindCSS.",
+        tags: ["Astro", "Tailwind", "Responsive Design"],
+        color: "from-purple-500 to-violet-700"
     }
+];
+
+const skills = [
+  { category: "Frontend Core", items: ["Angular (Expert)", "TypeScript", "RxJS", "HTML5", "CSS3/SCSS"] },
+  { category: "Backend & Languages", items: ["Java", "Spring Boot", "C#", ".NET", "Node.js"] },
+  { category: "Database & Cloud", items: ["MongoDB", "MySQL", "Docker", "AWS (Basic)"] },
+  { category: "Tools & UI", items: ["Git", "Bootstrap", "PrimeNG", "TailwindCSS", "Figma"] }
+];
+
+const experiences = [
+  {
+    role: "Senior Full Stack Developer",
+    company: "Seedma S.r.l.",
+    period: "2024 - Presente",
+    description: "Sviluppo e manutenzione di applicazioni enterprise per l'Asset Management industriale. Focus su architetture Angular scalabili e backend .NET/Java."
+  },
+  {
+    role: "Full Stack Developer",
+    company: "Seedma S.r.l.",
+    period: "2022 - 2024",
+    description: "Implementazione di nuove feature, refactoring di codice legacy e ottimizzazione delle performance dell'applicativo web principale."
+  }
 ];
 ---
 
-<MainLayout title="Antonio | Portfolio">
+<MainLayout title="Antonio D'Arrigo | Senior Full Stack Developer">
 	<!-- Hero Section -->
 	<main class="flex flex-col items-center justify-center min-h-[90vh] py-12 relative overflow-hidden">
 		<!-- Background decorations -->
         <div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
-            <div class="absolute top-[20%] left-[20%] w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
+            <div class="absolute top-[20%] left-[20%] w-72 h-72 bg-indigo-500/10 rounded-full blur-3xl animate-pulse"></div>
             <div class="absolute bottom-[20%] right-[20%] w-96 h-96 bg-blue-600/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
         </div>
 
-		<div class="relative group mb-8">
-			<div class="absolute -inset-1 bg-gradient-to-r from-cyan-400 to-blue-600 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
-			<div class="relative px-7 py-4 bg-slate-900 rounded-lg leading-none flex items-center">
-				<span class="text-cyan-400 font-medium">👋 Ciao, sono Antonio</span>
+		<div class="relative group mb-8 fade-in">
+			<div class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-blue-600 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
+			<div class="relative px-6 py-3 bg-slate-950 rounded-lg leading-none flex items-center">
+				<span class="text-indigo-400 font-medium text-sm tracking-wider uppercase">Angular Expert</span>
 			</div>
 		</div>
 		
-		<h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-center text-white mb-6">
-			Senior Developer <br />
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">specializzato in Angular</span>
+		<h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-center text-white mb-6 fade-in" style="transition-delay: 100ms;">
+			Antonio D'Arrigo <br />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-blue-500">Senior Full Stack dev</span>
 		</h1>
         
-        <p class="text-lg text-slate-300 text-center max-w-2xl mb-10 leading-relaxed">
-            Costruisco applicazioni web scalabili e performanti, con un focus maniacale sulla user experience e sulla qualità del codice.
+        <p class="text-lg md:text-xl text-slate-300 text-center max-w-3xl mb-10 leading-relaxed fade-in" style="transition-delay: 200ms;">
+            Specialista Angular con forte esperienza nel mondo Enterprise. <br class="hidden md:block"/>
+            Creo architetture robuste e interfacce utente complesse per il web moderno.
         </p>
 
-        <div class="flex gap-4">
-            <a href="#projects" class="rounded-full bg-cyan-500 px-8 py-3 font-bold text-black transition hover:bg-cyan-400 transform hover:scale-105">
-                Vedi Progetti
+        <div class="flex flex-col sm:flex-row gap-4 fade-in" style="transition-delay: 300ms;">
+             <a href="#projects" class="rounded-full bg-indigo-600 px-8 py-3.5 font-bold text-white transition hover:bg-indigo-500 hover:shadow-lg hover:shadow-indigo-500/25 transform hover:-translate-y-0.5 text-center">
+                Esplora i Miei Lavori
             </a>
-            <a href="/about" class="rounded-full border border-slate-700 bg-slate-900/50 px-8 py-3 font-bold text-white transition hover:bg-slate-800 hover:text-cyan-400 hover:border-cyan-400/50">
-                Chi Sono
+            <a href="/cv-antonio-darrigo.pdf" download class="rounded-full border border-slate-700 bg-slate-900/50 px-8 py-3.5 font-bold text-white transition hover:bg-slate-800 hover:text-indigo-400 hover:border-indigo-400/50 text-center">
+                Scarica CV
             </a>
         </div>
 	</main>
 
-    <!-- Projects Section -->
-    <section id="projects" class="py-20 scroll-mt-20">
-        <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-16">
-            Progetti Recenti
+    <!-- Skills Section -->
+    <section class="py-20 relative bg-slate-950/50">
+        <div class="absolute inset-0 bg-grid-slate-900/[0.04] -z-10"></div>
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-12 fade-in">
+            Competenze Tecniche
         </h2>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project) => (
-                <article class="group relative rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-500/50 transition duration-300 overflow-hidden hover:shadow-2xl hover:shadow-cyan-500/10">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto px-4">
+            {skills.map((skillGroup, index) => (
+                <div class="bg-slate-900/80 border border-slate-800 p-6 rounded-xl hover:border-indigo-500/30 transition-colors fade-in" style={`transition-delay: ${index * 100}ms`}>
+                    <h3 class="text-lg font-semibold text-indigo-400 mb-4">{skillGroup.category}</h3>
+                    <ul class="space-y-2">
+                        {skillGroup.items.map(item => (
+                            <li class="flex items-center text-slate-300 text-sm">
+                                <span class="w-1.5 h-1.5 bg-indigo-500 rounded-full mr-2"></span>
+                                {item}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            ))}
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="py-20 max-w-4xl mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-16 fade-in">
+            Esperienza Professionale
+        </h2>
+        
+        <div class="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-800 before:to-transparent">
+            {experiences.map((exp, index) => (
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active fade-in" style={`transition-delay: ${index * 150}ms`}>
+                    <div class="flex items-center justify-center w-10 h-10 rounded-full border border-slate-800 bg-slate-900 group-[.is-active]:bg-indigo-600 group-[.is-active]:text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                    </div>
+                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-slate-900 p-6 rounded-xl border border-slate-800 hover:border-indigo-500/30 transition shadow-sm">
+                        <div class="flex items-center justify-between space-x-2 mb-1">
+                            <div class="font-bold text-white">{exp.role}</div>
+                            <time class="font-mono text-xs text-indigo-400">{exp.period}</time>
+                        </div>
+                        <div class="text-slate-400 text-sm mb-2">{exp.company}</div>
+                        <div class="text-slate-300 text-sm leading-relaxed">
+                            {exp.description}
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 scroll-mt-20">
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-16 fade-in">
+            Progetti in Evidenza
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4">
+            {projects.map((project, index) => (
+                <article class="group relative rounded-xl bg-slate-900 border border-slate-800 hover:border-indigo-500/50 transition duration-300 overflow-hidden hover:shadow-2xl hover:shadow-indigo-500/10 fade-in" style={`transition-delay: ${index * 100}ms`}>
                     <!-- Image Placeholder -->
                     <div class={`h-48 w-full bg-gradient-to-br ${project.color} opacity-80 group-hover:opacity-100 transition duration-300 flex items-center justify-center`}>
-                        <span class="text-white/20 text-6xl font-black select-none">IMG</span>
+                         <div class="text-center p-4">
+                            <span class="text-white/30 text-4xl font-black select-none block mb-2">{project.title.substring(0,2).toUpperCase()}</span>
+                        </div>
                     </div>
                     
                     <div class="p-6">
-                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-indigo-400 transition-colors">
                             {project.title}
                         </h3>
-                        <p class="text-slate-400 mb-4 h-20 overflow-hidden">
+                        <p class="text-slate-400 mb-4 h-20 overflow-hidden text-sm">
                             {project.description}
                         </p>
                         
                         <div class="flex flex-wrap gap-2">
                             {project.tags.map((tag) => (
-                                <span class="px-3 py-1 text-xs font-semibold rounded-full bg-slate-800 text-cyan-400 border border-slate-700">
+                                <span class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-slate-800 text-indigo-300 border border-slate-700">
                                     {tag}
                                 </span>
                             ))}

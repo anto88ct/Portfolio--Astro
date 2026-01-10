@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+@layer utilities {
+  .fade-in {
+    @apply opacity-0 translate-y-8 transition-all duration-700 ease-out;
+  }
+  
+  .fade-in.visible {
+    @apply opacity-100 translate-y-0;
+  }
+}

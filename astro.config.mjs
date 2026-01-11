@@ -7,5 +7,8 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
-  }
+  },
+  site: 'https://anto88ct.github.io',
+  // Dynamic base: /Portfolio--Astro in production, / in development
+  base: import.meta.env.PROD ? '/Portfolio--Astro' : '/',
 });

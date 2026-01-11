@@ -1,0 +1,186 @@
+---
+
+---
+
+<canvas id="interactive-bg"></canvas>
+
+<style>
+    #interactive-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        /* background: transparent; Let the page background show through */
+        pointer-events: none; /* Let clicks pass through */
+    }
+</style>
+
+<script>
+    interface Particle {
+        x: number;
+        y: number;
+        originX: number;
+        originY: number;
+        color: string;
+        size: number;
+        vx: number;
+        vy: number;
+    }
+
+    const canvas = document.getElementById(
+        "interactive-bg",
+    ) as HTMLCanvasElement;
+    const ctx = canvas.getContext("2d");
+
+    let particles: Particle[] = [];
+    const mouse = { x: -1000, y: -1000 };
+
+    // Configuration
+    const SPACING = 30;
+    const RADIUS = 0.8; // Smaller particles
+    const BASE_COLOR = "255, 255, 255";
+    const MOUSE_RADIUS = 600; // Even broader range (was 300)
+    const ATTRACTION_FORCE = 0.08; // Weaker attraction to avoid super-clumping
+    const RETURN_FORCE = 0.04;
+    const DAMPING = 0.95; // More floaty
+
+    let time = 0;
+
+    function init() {
+        if (!canvas) return;
+
+        // Resize canvas
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        particles = [];
+
+        // Create grid
+        for (let x = 0; x < canvas.width; x += SPACING) {
+            for (let y = 0; y < canvas.height; y += SPACING) {
+                particles.push({
+                    x,
+                    y,
+                    originX: x,
+                    originY: y,
+                    color: BASE_COLOR,
+                    size: RADIUS,
+                    vx: 0,
+                    vy: 0,
+                });
+            }
+        }
+    }
+
+    function animate() {
+        if (!ctx || !canvas) return;
+        time += 0.01;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        particles.forEach((p) => {
+            // Distance to mouse
+            const dx = mouse.x - p.x;
+            const dy = mouse.y - p.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            let alpha = 0;
+            if (dist < MOUSE_RADIUS) {
+                alpha = 1 - dist / MOUSE_RADIUS;
+                alpha = Math.pow(alpha, 2); // steeper falloff
+            } else {
+                alpha = 0;
+            }
+
+            // WAVE/NOISE Movement
+            // Only apply if NOT near the center of mouse
+            // This ensures center particles are "ferme" (still) as requested
+            if (dist > 50) {
+                const waveX = Math.sin(p.originY * 0.01 + time) * 0.2;
+                const waveY = Math.cos(p.originX * 0.01 + time) * 0.2;
+                p.vx += waveX;
+                p.vy += waveY;
+            }
+
+            // Magnetic Attraction Logic
+            if (dist < MOUSE_RADIUS) {
+                const angle = Math.atan2(dy, dx);
+                const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS;
+
+                // Anti-clumping: if too close, reduce force or slightly repel
+                let attractor = ATTRACTION_FORCE;
+
+                if (dist < 50) {
+                    // "dead zone" for attraction too, to stop them fighting for the pixel
+                    // Just dampen heavily instead of attracting/repelling continuously
+                    attractor = 0;
+                }
+
+                p.vx += Math.cos(angle) * force * attractor * 15;
+                p.vy += Math.sin(angle) * force * attractor * 15;
+            }
+
+            // Return to Origin Logic (Spring)
+            const dxOrigin = p.originX - p.x;
+            const dyOrigin = p.originY - p.y;
+
+            p.vx += dxOrigin * RETURN_FORCE;
+            p.vy += dyOrigin * RETURN_FORCE;
+
+            // Apply damping
+            // EXTRA DAMPING at center to freeze them
+            if (dist < 50) {
+                p.vx *= 0.5; // Heavy friction
+                p.vy *= 0.5;
+            } else {
+                p.vx *= DAMPING;
+                p.vy *= DAMPING;
+            }
+
+            // Update position
+            p.x += p.vx;
+            p.y += p.vy;
+
+            // Draw only if visible
+            const velocity = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
+            if (alpha > 0.001 || velocity > 0.2) {
+                if (alpha < 0.02 && velocity > 0.2) alpha = 0.0; // Clean cut
+
+                if (alpha > 0) {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(${p.color}, ${alpha})`;
+                    ctx.fill();
+                }
+            }
+        });
+
+        requestAnimationFrame(animate);
+    }
+
+    // Event Listeners
+    window.addEventListener("resize", init);
+
+    window.addEventListener("mousemove", (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+    });
+
+    // Handle touch for mobile
+    window.addEventListener("touchmove", (e) => {
+        const touch = e.touches[0];
+        mouse.x = touch.clientX;
+        mouse.y = touch.clientY;
+    });
+
+    window.addEventListener("mouseout", () => {
+        mouse.x = -1000;
+        mouse.y = -1000;
+    });
+
+    // Start
+    init();
+    animate();
+</script>

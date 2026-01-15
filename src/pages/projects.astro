@@ -1,0 +1,98 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+
+const projects = [
+    {
+        title: "OpenEAM (Seedma Srl)",
+        role: "Full Stack Developer & UX Lead",
+        description:
+            "Enterprise software per la gestione completa delle manutenzioni, ispezioni e archivio documentale per grandi impianti industriali. Ho guidato il rinnovamento completo della UX creando una libreria grafica interna in Angular e sviluppato numerose feature evolutive.",
+        tags: ["Angular", "DotNet", "MySQL", "TypeScript", "UX Design"],
+        color: "from-blue-600 to-indigo-800",
+        link: "https://www.openeam.it", // Added link based on description
+        logoPlaceholder: "OE",
+    },
+    {
+        title: "PayPeek",
+        role: "Creator & Lead Developer",
+        description:
+            "Piattaforma innovativa per la gestione intelligente delle buste paga. Utilizza OCR per estrarre dati dai PDF e un chatbot RAG basato su LightRAG per rispondere a domande sui dati retributivi. Include dashboard analitiche e storico dettagliato.",
+        tags: [
+            "Angular",
+            "Spring Boot",
+            "Python",
+            "Docker",
+            "MongoDB",
+            "LightRAG",
+            "AI",
+        ],
+        color: "from-emerald-500 to-teal-800",
+        link: "#",
+        logoPlaceholder: "PP",
+    },
+    {
+        title: "ScrapLink",
+        role: "Developer",
+        description:
+            "Tool di automazione scritto interamente in Python per l'estrazione dati da LinkedIn. Permette di generare report XLSX dettagliati sui dipendenti di un'azienda specifica, automatizzando il processo di lead generation e analisi.",
+        tags: ["Python", "Automation", "Data Scraping", "XLSX"],
+        color: "from-cyan-600 to-blue-800",
+        link: "#",
+        logoPlaceholder: "SL",
+    },
+    {
+        title: "App Continuità di Cura",
+        role: "Full Stack Developer",
+        description:
+            "PWA realizzata per Agile Srl (partner Seedma). Facilita la comunicazione post-terapeutica tra medico e paziente. Progetto curato interamente, dall'architettura Angular/Spring Boot all'implementazione delle Push Notifications.",
+        tags: [
+            "Angular",
+            "Spring Boot",
+            "PWA",
+            "Push Notifications",
+            "Mobile First",
+        ],
+        color: "from-rose-500 to-pink-700",
+        link: "#",
+        logoPlaceholder: "CC",
+    },
+];
+---
+
+<MainLayout title="Progetti | Antonio D'Arrigo">
+    <div class="relative pt-10 pb-20">
+        <!-- Background Effects -->
+        <div
+            class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-indigo-600/10 blur-[120px] -z-10 rounded-full pointer-events-none"
+        >
+        </div>
+
+        <div class="text-center max-w-3xl mx-auto mb-16 fade-in">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-6">
+                I Miei <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-blue-500"
+                    >Progetti</span
+                >
+            </h1>
+            <p class="text-lg text-slate-300 leading-relaxed">
+                Una selezione dei lavori più significativi che ho realizzato.
+                Dal software enterprise all'intelligenza artificiale, ogni
+                progetto rappresenta una sfida tecnologica superata.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 auto-rows-fr">
+            {
+                projects.map((project, index) => (
+                    <div
+                        class="fade-in"
+                        style={`transition-delay: ${index * 100}ms`}
+                    >
+                        <ProjectCard {...project} imageColor={project.color} />
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</MainLayout>

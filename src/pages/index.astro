@@ -1,6 +1,8 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 import InteractiveBackground from '../components/InteractiveBackground.astro';
+import SkillsCarousel from '../components/SkillsCarousel.astro';
+import SkillsOverview from '../components/SkillsOverview.astro';
 
 const projects = [
     {
@@ -23,12 +25,7 @@ const projects = [
     }
 ];
 
-const skills = [
-  { category: "Frontend Core", items: ["Angular (Expert)", "TypeScript", "RxJS", "HTML5", "CSS3/SCSS"] },
-  { category: "Backend & Languages", items: ["Java", "Spring Boot", "C#", ".NET", "Node.js"] },
-  { category: "Database & Cloud", items: ["MongoDB", "MySQL", "Docker", "AWS (Basic)"] },
-  { category: "Tools & UI", items: ["Git", "Bootstrap", "PrimeNG", "TailwindCSS", "Figma"] }
-];
+
 
 const experiences = [
   {
@@ -90,20 +87,9 @@ const experiences = [
             Competenze Tecniche
         </h2>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto px-4">
-            {skills.map((skillGroup, index) => (
-                <div class="bg-slate-900/80 border border-slate-800 p-6 rounded-xl hover:border-indigo-500/30 transition-colors fade-in" style={`transition-delay: ${index * 100}ms`}>
-                    <h3 class="text-lg font-semibold text-indigo-400 mb-4">{skillGroup.category}</h3>
-                    <ul class="space-y-2">
-                        {skillGroup.items.map(item => (
-                            <li class="flex items-center text-slate-300 text-sm">
-                                <span class="w-1.5 h-1.5 bg-indigo-500 rounded-full mr-2"></span>
-                                {item}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            ))}
+        <div class="max-w-7xl mx-auto px-4 fade-in">
+            <SkillsCarousel />
+            <SkillsOverview />
         </div>
     </section>
 

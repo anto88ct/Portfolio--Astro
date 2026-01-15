@@ -1,0 +1,91 @@
+---
+const skills = [
+    { name: "Angular", icon: "https://cdn.simpleicons.org/angular/DD0031" },
+    {
+        name: "TypeScript",
+        icon: "https://cdn.simpleicons.org/typescript/3178C6",
+    },
+    { name: "RxJS", icon: "https://cdn.simpleicons.org/rxjs/B7178C" },
+    { name: "HTML5", icon: "https://cdn.simpleicons.org/html5/E34F26" },
+    { name: "CSS3", icon: "https://cdn.simpleicons.org/css3/1572B6" },
+    { name: "Sass", icon: "https://cdn.simpleicons.org/sass/CC6699" },
+    { name: "Java", icon: "https://cdn.simpleicons.org/openjdk/FFFFFF" },
+    {
+        name: "Spring Boot",
+        icon: "https://cdn.simpleicons.org/springboot/6DB33F",
+    },
+    { name: "C#", icon: "https://cdn.simpleicons.org/csharp/239120" },
+    { name: ".NET", icon: "https://cdn.simpleicons.org/dotnet/512BD4" },
+    { name: "Node.js", icon: "https://cdn.simpleicons.org/nodedotjs/339933" },
+    { name: "MongoDB", icon: "https://cdn.simpleicons.org/mongodb/47A248" },
+    { name: "MySQL", icon: "https://cdn.simpleicons.org/mysql/4479A1" },
+    { name: "Docker", icon: "https://cdn.simpleicons.org/docker/2496ED" },
+    { name: "Git", icon: "https://cdn.simpleicons.org/git/F05032" },
+    { name: "Bootstrap", icon: "https://cdn.simpleicons.org/bootstrap/7952B3" },
+];
+---
+
+<div
+    class="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]"
+>
+    <ul
+        class="flex items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:max-w-none animate-infinite-scroll"
+    >
+        {
+            skills.map((skill) => (
+                <li>
+                    <div class="flex flex-col items-center gap-2 group">
+                        <div class="relative w-16 h-16 flex items-center justify-center bg-slate-900/50 rounded-xl border border-slate-800 group-hover:border-indigo-500/50 group-hover:bg-indigo-500/10 transition-all duration-300">
+                            <img
+                                src={skill.icon}
+                                alt={skill.name}
+                                class="w-8 h-8 opacity-70 group-hover:opacity-100 transition-opacity duration-300"
+                            />
+                        </div>
+                        <span class="text-xs font-mono text-slate-500 group-hover:text-indigo-400 transition-colors uppercase tracking-wider">
+                            {skill.name}
+                        </span>
+                    </div>
+                </li>
+            ))
+        }
+    </ul>
+    <ul
+        class="flex items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:max-w-none animate-infinite-scroll"
+        aria-hidden="true"
+    >
+        {
+            skills.map((skill) => (
+                <li>
+                    <div class="flex flex-col items-center gap-2 group">
+                        <div class="relative w-16 h-16 flex items-center justify-center bg-slate-900/50 rounded-xl border border-slate-800 group-hover:border-indigo-500/50 group-hover:bg-indigo-500/10 transition-all duration-300">
+                            <img
+                                src={skill.icon}
+                                alt={skill.name}
+                                class="w-8 h-8 opacity-70 group-hover:opacity-100 transition-opacity duration-300"
+                            />
+                        </div>
+                        <span class="text-xs font-mono text-slate-500 group-hover:text-indigo-400 transition-colors uppercase tracking-wider">
+                            {skill.name}
+                        </span>
+                    </div>
+                </li>
+            ))
+        }
+    </ul>
+</div>
+
+<style>
+    .animate-infinite-scroll {
+        animation: infinite-scroll 40s linear infinite;
+    }
+
+    @keyframes infinite-scroll {
+        from {
+            transform: translateX(0);
+        }
+        to {
+            transform: translateX(-100%);
+        }
+    }
+</style>

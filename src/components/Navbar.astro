@@ -1,7 +1,7 @@
 ---
 const navItems = [
   { name: "Home", path: "/" },
-  { name: "Progetti", path: "/projects" },
+  { name: "Progetti", path: "/#projects" },
   { name: "Chi Sono", path: "/about" },
   { name: "Contatti", path: "/contatti" },
 ];
@@ -50,13 +50,42 @@ const pathname = new URL(Astro.request.url).pathname;
       >
         {
           navItems.map((item) => {
+            // Adjust path for base URL
+            const basePath =
+              import.meta.env.BASE_URL === "/" ? "" : import.meta.env.BASE_URL;
+            // Handle root specially to avoid double slashes if base is /
+            // If item.path is just '/', we want base/ (e.g. /Portfolio/ or /)
+            // If item.path is /about, we want base/about (e.g. /Portfolio/about or /about)
+
+            let href = item.path;
+            if (item.path.startsWith("/")) {
+              href = `${basePath}${item.path === "/" ? "" : item.path.substring(1)}`;
+            }
+
+            // Special case for projects anchor if we are not on home
+            if (item.path === "/#projects") {
+              href = `${basePath}#projects`;
+            }
+
+            // Simplified logic: just join base with path, correcting for slashes
+            // import.meta.env.BASE_URL ends with / if set? No, usually not, or yes depending on astro config.
+            // Let's assume strict usage:
+            const finalHref =
+              item.path.startsWith("/") && item.path !== "/"
+                ? `${import.meta.env.BASE_URL}${item.path.substring(1)}`
+                : item.path === "/"
+                  ? import.meta.env.BASE_URL
+                  : item.path;
+
             const isActive =
-              pathname === item.path ||
-              (item.path !== "/" && pathname.startsWith(item.path));
+              pathname === finalHref ||
+              (finalHref !== import.meta.env.BASE_URL &&
+                pathname.startsWith(finalHref));
+
             return (
               <li>
                 <a
-                  href={item.path}
+                  href={finalHref}
                   class={`block py-2 px-3 rounded md:p-0 transition-colors duration-300 ${isActive ? "text-cyan-400 font-semibold" : "text-gray-300 hover:text-cyan-400"}`}
                   aria-current={isActive ? "page" : undefined}
                 >

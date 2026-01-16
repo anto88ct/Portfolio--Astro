@@ -4,26 +4,7 @@ import InteractiveBackground from '../components/InteractiveBackground.astro';
 import SkillsCarousel from '../components/SkillsCarousel.astro';
 import SkillsOverview from '../components/SkillsOverview.astro';
 
-const projects = [
-    {
-        title: "Seedma Asset Manager",
-        description: "Applicazione web enterprise per la gestione completa delle manutenzioni di grandi impianti industriali.",
-        tags: ["Angular", "TypeScript", "Dotnet", "HTML", "CSS"],
-        color: "from-blue-600 to-indigo-700"
-    },
-    {
-        title: "PayPeek System",
-        description: "Sistema HR innovativo con gestione buste paga, OCR e dashboard analitiche avanzate.",
-        tags: ["Angular", "Spring Boot", "Sviluppo in corso"],
-        color: "from-emerald-500 to-teal-700"
-    },
-    {
-        title: "Portfolio v2",
-        description: "Portfolio personale moderno e performante sviluppato con Astro e TailwindCSS.",
-        tags: ["Astro", "Tailwind", "Responsive Design"],
-        color: "from-purple-500 to-violet-700"
-    }
-];
+import { projects } from '../data/projects';
 
 
 
@@ -71,7 +52,7 @@ const experiences = [
         </p>
 
         <div class="flex flex-col sm:flex-row gap-4 fade-in" style="transition-delay: 300ms;">
-             <a href="/projects" class="rounded-full bg-indigo-600 px-8 py-3.5 font-bold text-white transition hover:bg-indigo-500 hover:shadow-lg hover:shadow-indigo-500/25 transform hover:-translate-y-0.5 text-center">
+             <a href="#projects" class="rounded-full bg-indigo-600 px-8 py-3.5 font-bold text-white transition hover:bg-indigo-500 hover:shadow-lg hover:shadow-indigo-500/25 transform hover:-translate-y-0.5 text-center">
                 Esplora i Miei Lavori
             </a>
             <a href="/cv-antonio-darrigo.pdf" download class="rounded-full border border-slate-700 bg-slate-900/50 px-8 py-3.5 font-bold text-white transition hover:bg-slate-800 hover:text-indigo-400 hover:border-indigo-400/50 text-center">
@@ -138,10 +119,12 @@ const experiences = [
                     
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-white mb-2 group-hover:text-indigo-400 transition-colors">
-                            {project.title}
+                            <a href={`${import.meta.env.BASE_URL}progetti/${project.slug}`} class="before:absolute before:inset-0">
+                                {project.title}
+                            </a>
                         </h3>
                         <p class="text-slate-400 mb-4 h-20 overflow-hidden text-sm">
-                            {project.description}
+                            {project.shortDescription}
                         </p>
                         
                         <div class="flex flex-wrap gap-2">

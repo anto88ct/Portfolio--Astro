@@ -1,0 +1,218 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import { projects } from "../../data/projects";
+
+export async function getStaticPaths() {
+    return projects.map((project) => ({
+        params: { slug: project.slug },
+        props: { project },
+    }));
+}
+
+const { project } = Astro.props;
+---
+
+<MainLayout title={`${project.title} | Antonio D'Arrigo`}>
+    <div class="pb-12 min-h-screen">
+        <!-- Breadcrumb / Back Navigation -->
+        <div class="mb-8 mt-4">
+            <a
+                href={`${import.meta.env.BASE_URL}#projects`}
+                class="inline-flex items-center text-indigo-400 hover:text-indigo-300 transition-colors group"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="mr-2 group-hover:-translate-x-1 transition-transform"
+                    ><path d="m15 18-6-6 6-6"></path></svg
+                >
+                Torna ai Progetti
+            </a>
+        </div>
+
+        <!-- Hero Section -->
+        <div class="mb-16">
+            <div
+                class="relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 shadow-2xl"
+            >
+                <!-- Background Gradient Placeholder -->
+                <div
+                    class={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-20`}
+                >
+                </div>
+
+                <div
+                    class="relative p-8 md:p-16 flex flex-col items-center text-center"
+                >
+                    <div
+                        class={`w-24 h-24 mb-6 rounded-2xl bg-gradient-to-br ${project.color} flex items-center justify-center shadow-lg`}
+                    >
+                        <span class="text-white/50 text-4xl font-black"
+                            >{project.title.substring(0, 2).toUpperCase()}</span
+                        >
+                    </div>
+                    <h1
+                        class="text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tight"
+                    >
+                        {project.title}
+                    </h1>
+                    <p class="text-xl text-slate-300 max-w-2xl leading-relaxed">
+                        {project.shortDescription}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <!-- Main Info -->
+            <div class="lg:col-span-2 space-y-12">
+                <!-- Description -->
+                <section class="prose prose-invert max-w-none">
+                    <h2
+                        class="text-2xl font-bold text-white mb-4 flex items-center"
+                    >
+                        <svg
+                            class="w-6 h-6 mr-3 text-indigo-500"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            ><path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                            ></path></svg
+                        >
+                        Il Progetto
+                    </h2>
+                    <div
+                        class="bg-slate-900/50 rounded-xl p-8 border border-slate-800 text-slate-300 leading-relaxed"
+                    >
+                        {project.fullDescription}
+                    </div>
+                </section>
+
+                <!-- Gallery Section -->
+                <section>
+                    <h2
+                        class="text-2xl font-bold text-white mb-6 flex items-center"
+                    >
+                        <svg
+                            class="w-6 h-6 mr-3 text-indigo-500"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            ><path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                            ></path></svg
+                        >
+                        Galleria
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {
+                            project.gallery.map((item) => (
+                                <div class="group relative aspect-video rounded-xl overflow-hidden bg-slate-800 border border-slate-700 cursor-pointer">
+                                    <div
+                                        class={`absolute inset-0 ${item.placeholderColor} opacity-50 group-hover:opacity-75 transition duration-500`}
+                                    />
+                                    <div class="absolute inset-0 flex items-center justify-center">
+                                        <span class="text-slate-400 font-medium group-hover:text-white transition duration-300">
+                                            {item.title}
+                                        </span>
+                                    </div>
+                                    <div class="absolute inset-0 border-2 border-transparent group-hover:border-indigo-500/50 rounded-xl transition duration-300" />
+                                </div>
+                            ))
+                        }
+                    </div>
+                    <p class="mt-4 text-center text-sm text-slate-500 italic">
+                        * Immagini placeholder. Clicca per ingrandire (work in
+                        progress)
+                    </p>
+                </section>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="space-y-8">
+                <!-- Tech Stack -->
+                <div
+                    class="bg-slate-900 rounded-xl p-6 border border-slate-800"
+                >
+                    <h3 class="text-lg font-bold text-white mb-4">
+                        Tech Stack
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        {
+                            project.tags.map((tag) => (
+                                <span class="px-3 py-1 text-sm font-medium rounded-lg bg-slate-800 text-indigo-300 border border-slate-700">
+                                    {tag}
+                                </span>
+                            ))
+                        }
+                    </div>
+                </div>
+
+                <!-- Key Features -->
+                <div
+                    class="bg-slate-900 rounded-xl p-6 border border-slate-800"
+                >
+                    <h3 class="text-lg font-bold text-white mb-4">
+                        Funzionalità Chiave
+                    </h3>
+                    <ul class="space-y-3">
+                        {
+                            project.features.map((feature) => (
+                                <li class="flex items-start text-slate-300 text-sm">
+                                    <svg
+                                        class="w-5 h-5 mr-3 text-emerald-500 shrink-0"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M5 13l4 4L19 7"
+                                        />
+                                    </svg>
+                                    {feature}
+                                </li>
+                            ))
+                        }
+                    </ul>
+                </div>
+
+                <!-- CTA or External Links (Placeholder) -->
+                <div
+                    class="p-6 rounded-xl bg-gradient-to-br from-indigo-900/20 to-blue-900/20 border border-indigo-500/20"
+                >
+                    <h3 class="text-white font-bold mb-2">
+                        Interessato a questo progetto?
+                    </h3>
+                    <p class="text-slate-400 text-sm mb-4">
+                        Contattami per approfondire i dettagli tecnici o
+                        richiedere una demo.
+                    </p>
+                    <a
+                        href="/contatti"
+                        class="block w-full text-center py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-colors"
+                    >
+                        Parliamone
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</MainLayout>

@@ -49,22 +49,22 @@ export const projects: Project[] = [
     ]
   },
   {
-    slug: "portfolio-v2",
-    title: "Portfolio v2",
-    shortDescription: "Portfolio personale moderno e performante sviluppato con Astro e TailwindCSS.",
-    fullDescription: "La seconda iterazione del mio portfolio personale, progettata con un focus estremo sulle performance e la user experience. Utilizza Astro per generare pagine statiche ultra-veloci e TailwindCSS per un design system coerente e altamente personalizzabile.",
-    tags: ["Astro", "Tailwind", "Responsive Design"],
-    color: "from-purple-500 to-violet-700",
+    slug: "scraplink",
+    title: "ScrapLink",
+    shortDescription: "Tool OSINT e automazione per LinkedIn per la lead generation aziendale.",
+    fullDescription: "Tool OSINT e di automazione scritto in Python che rivoluziona la ricerca su LinkedIn. Attraverso tecniche di Google Dorking e automazione browser, ScrapLink permette di individuare dipendenti di specifiche aziende e generare report Excel dettagliati con Nome, Cognome, Headline e Link al profilo, semplificando drasticamente i processi di recruitment e lead generation.",
+    tags: ["Python", "OSINT", "Automation", "Google Dorking"],
+    color: "from-cyan-600 to-blue-800",
     features: [
-      "100/100 Lighthouse Score",
-      "Design completamente responsive",
-      "Dark mode nativa",
-      "Animazioni fluide e interattive"
+      "Automazione Browser completa",
+      "Tecniche avanzate di Google Dorking",
+      "Export dati in Excel (.xls)",
+      "Estrazione mirata profili aziendali"
     ],
     gallery: [
-      { title: "Homepage Hero", placeholderColor: "bg-purple-900/50" },
-      { title: "Sezione Progetti", placeholderColor: "bg-violet-900/50" },
-      { title: "Pagina Contatti", placeholderColor: "bg-slate-800" }
+      { title: "Interfaccia CLI", placeholderColor: "bg-cyan-900/50" },
+      { title: "Report Excel Generato", placeholderColor: "bg-blue-900/50" },
+      { title: "Automazione in azione", placeholderColor: "bg-slate-800" }
     ]
   }
 ];
